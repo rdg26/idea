@@ -16,6 +16,8 @@
     },
     "dependencies": {
         "alpinejs": "^3.15.11",
+        "bootstrap": "^5.3.8",
+        "bootstrap-icons": "^1.13.1",
         "playwright": "^1.59.1"
     }
 }

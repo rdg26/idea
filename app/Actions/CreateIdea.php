@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Actions;
+
+use App\Models\User;
+use Illuminate\Container\Attributes\CurrentUser;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+class CreateIdea
+{
+    public function __construct(#[CurrentUser] protected User $user)
+    {
+        //
+    }
+
+    public function handle(array $attributes, ?User $user = null): void
+    {   
+        //dd($attributes);
+        
+
+        $data = collect($attributes)->only([
+            'title', 'description', 'status',
+        ])->toArray();
+
+               
+        DB::transaction(function () use ($data, $attributes) {
+            $idea = $this->user->ideas()->create($data);
+            if (! empty($attributes['images'])) {
+
+                foreach ($attributes['images'] as $image) {
+
+                    $idea->images()->create([
+                        'path' => $image->store('ideas', 'public'),
+                    ]);
+
+                }
+
+            }
+
+          $steps = collect($attributes['steps'] ?? [])
+    ->map(fn ($step) => [
+        'description' => $step['description'] ?? '',
+        'completed' => $step['completed'] ?? false,
+    ]);
+
+            $idea->steps()->createMany($steps);
+        });
+
+    }
+}

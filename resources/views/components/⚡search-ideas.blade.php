@@ -82,40 +82,11 @@ new class extends Component
     {{-- Lista --}}
     <div class="grid md:grid-cols-2 gap-6">
 
-        @forelse ($this->ideas as $idea)
+            @forelse ($this->ideas as $idea)
 
-         <div class="relative">
-                <x-card href="{{ route('idea.show', $idea) }}">
-                    <h3 class="text-foreground text-lg">
-                        {{ $idea->title }}
-                    </h3>
+                <x-idea.card :idea="$idea" />
 
-                    <p class="text-sm text-muted-foreground">
-                        {{ $idea->user->name }}
-                    </p>
-
-                    <div class="mt-3 text-muted-foreground">
-                        {{ $idea->description }}
-                    </div>
-
-                    <div class="mt-4">
-                        <span>
-                            {{ $idea->created_at->diffForHumans() }}
-                        </span>
-                    </div>
-                </x-card>
-
-                <div class="absolute bottom-4 right-4 z-10">
-                    <livewire:idea-like
-                        :idea="$idea"
-                        :key="'like-'.$idea->id"
-                    />
-                </div>
-        </div>
-
-        
-
-        @empty
+            @empty
 
             <x-card>
                 {{ __('general.notfound') }}

@@ -1,10 +1,12 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
 @import 'tailwindcss';
 
 @import './components/btn.css' layer(components);
 @import './components/form.css' layer(components);
 
-@import 'bootstrap/dist/css/bootstrap.min.css';
-@import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -25,3 +27,21 @@
         --color-muted-foreground: oklch(0.6 0 0)
 
 }
+
+
+/* Bootstrap collapse override */
+
+.navbar-collapse.collapse {
+    visibility: visible !important;
+}
+
+.collapse.show {
+    visibility: visible !important;
+}
+
+/* Bootstrap compatibility */
+
+.collapse {
+    visibility: visible !important;
+}
+

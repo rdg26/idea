@@ -33,11 +33,5 @@
         {{ $slot }}
     </main>
 
-
-    {{-- Seletor de idioma --}}
-    
-
-    
-
 </body>
 </html>
